@@ -99,10 +99,10 @@ map <LEADER>a <C-w>h
 map <LEADER>d <C-w>l
 map <LEADER>w <C-w>k
 map <LEADER>s <C-w>j
-map <C-up> :res +3<CR>
-map <C-down> :res -3<CR>
-map <C-right> :vertical resize-3<CR>
-map <C-left> :vertical resize+3<CR>
+map <M-up> :res +3<CR>
+map <M-down> :res -3<CR>
+map <M-right> :vertical resize-3<CR>
+map <M-left> :vertical resize+3<CR>
 map sq <C-w>t<C-w>H
 map se <C-w>t<C-w>K
 
@@ -124,8 +124,9 @@ Plug 'luochen1990/rainbow'
 Plug 'voldikss/vim-translator'
 Plug 'voldikss/vim-floaterm'
 Plug 'puremourning/vimspector'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 call plug#end()
-
+ 
 "morhetz/gruvbox主题配置
 autocmd vimenter * ++nested colorscheme gruvbox
 set bg=dark
@@ -242,13 +243,24 @@ nnoremap <leader><F5> :w<CR>:FloatermNew --autoclose=0 vim_compile % -o
 "airline主题
 let g:airline_theme='dracula'
 
-"创建悬浮终端
-map <C-n> :FloatermNew<CR>
+"vim-floaterm创建悬浮终端
+"map ++ :FloatermNew<CR>
+let g:floaterm_wintype='split'
+let g:floaterm_height=10
+let g:floaterm_autoclose=2
+"let g:floaterm_autoinsert='v:true'
+tnoremap <silent>\\ <C-\><C-n>
+nnoremap <silent><M-+><M-+> :FloatermToggle<CR>
+tnoremap <silent><M-+><M-+> <C-\><C-n>:FloatermToggle<CR>
+tnoremap <silent><M-up> <C-\><C-n>:res +3<CR>i
+tnoremap <silent><M-down> <C-\><C-n>:res -3<CR>i
+tnoremap <silent><M-left> <C-\><C-n>:vertical resize-3<CR>i
+tnoremap <silent><M-right> <C-\><C-n>:vertical resize+3<CR>i
 
 "设置命令窗口高度
-inoremap <C-d> <Esc>:set cmdheight=2<CR>a
-inoremap <C-t> <Esc>:set cmdheight=10<CR>a
-nnoremap <C-d> :set cmdheight=2<CR>
+"inoremap <C-d> <Esc>:set cmdheight=2<CR>a
+"inoremap <C-t> <Esc>:set cmdheight=10<CR>a
+nnoremap <C-d> :set cmdheight=1<CR>
 nnoremap <C-t> :set cmdheight=10<CR>
 
 "vimspector(debug调试)
